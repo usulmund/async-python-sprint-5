@@ -1,0 +1,13 @@
+FROM python
+
+ 
+ENV HTTPS_PROXY=http://192.168.56.101:3128/
+ENV HTTP_PROXY=http://192.168.56.101:3128/
+    
+COPY src/ .
+COPY ./requirements.txt .
+RUN pip install -r requirements.txt
+
+
+WORKDIR src/
+CMD python main.py

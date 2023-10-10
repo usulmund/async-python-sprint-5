@@ -3,15 +3,15 @@ services:
   postgres-fastapi:
     build: 
         context: .
-        dockerfile: dockerization/Dockerfile-db
+        dockerfile: ../../dockerization/Dockerfile-db
     ports:
-        - "5432:5432"
+        - "1234:5432"
   
   nginx:
     image: nginx:latest
     volumes:
 
-        - ./services/nginx.conf:/etc/nginx/conf.d/default.conf
+        - ../../services/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
         - "80:80"
 
