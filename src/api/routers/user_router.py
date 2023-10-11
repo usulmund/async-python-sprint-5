@@ -23,7 +23,12 @@ from schemas.response_models import RegisterStatus
 user_router = APIRouter()
 
 
-@user_router.post('/register', response_model=RegisterStatus)
+@user_router.post(
+    '/register',
+    response_model=RegisterStatus,
+    summary='Account registration',
+    description='Enter username and password to register.'
+)
 async def register_user(
     response: Response,
     username: Annotated[str, Form()],
@@ -58,7 +63,11 @@ async def register_user(
     )
 
 
-@user_router.post('/auth')
+@user_router.post(
+    '/auth',
+    summary='Account authorization',
+    description='Enter username and password to authorize.'
+)
 async def auth_user(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     session: AsyncSession = Depends(get_session)

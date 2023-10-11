@@ -35,7 +35,12 @@ file_router = APIRouter()
 BUCKET_NAME = app_settings.bucket_name
 
 
-@file_router.get('/files/', response_model=FilesInfo)
+@file_router.get(
+    '/files/',
+    response_model=FilesInfo,
+    summary='Show info',
+    description='Use it to show all info about files in storage.'
+)
 async def get_info_about_files(
     current_user: Annotated[int, Depends(get_current_user)],
     s3: botocore.client = Depends(get_bucket_session),
@@ -61,7 +66,11 @@ async def get_info_about_files(
     )
 
 
-@file_router.post('/files/upload')
+@file_router.post(
+    '/files/upload',
+    summary='Upload file to storage',
+    description='Choose a file to upload it to storage.'
+)
 async def upload_file_to_storage(
     current_user: Annotated[int, Depends(get_current_user)],
     file: UploadFile,
@@ -84,7 +93,11 @@ async def upload_file_to_storage(
     s3.upload_fileobj(file.file, BUCKET_NAME, path_to_storage)
 
 
-@file_router.get('/files/download')
+@file_router.get(
+    '/files/download',
+    summary='Download file from storage',
+    description='Enter path or file-id to download it.'
+)
 async def download_file(
     current_user: Annotated[int, Depends(get_current_user)],
     path: Optional[str] = '',
@@ -102,9 +115,11 @@ async def download_file(
         path = await find_path_by_id(path)
 
     if path is None:
+
         return ORJSONResponse(
             {'error': 'file not exists'},
             status_code=status.HTTP_404_NOT_FOUND
         )
-
-    return RedirectResponse(f'http://localhost:80/{path}')
+    nginx_host = app_settings.nginx_host
+    nginx_port = app_settings.nginx_port
+    return RedirectResponse(f'http://{nginx_host}:{nginx_port}/{path}')

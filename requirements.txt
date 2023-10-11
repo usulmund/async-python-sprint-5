@@ -1,6 +1,7 @@
 fastapi[all]
 orjson==3.8.0
 pydantic==1.10.2
+pydantic_core==2.6.3
 uvicorn[standart]
 uvloop==0.17.0; sys_platform == "linux" or sys_platform == "darwin"  
 pydantic[dotenv]
@@ -20,7 +21,7 @@ python-multipart==0.0.5
 python-jose[cryptographic]==3.3.0
 passlib[bcrypt]==1.7.4
 
-boto3
-python-dotenv
-aiofiles
-cachetools
+boto3==1.28.61
+python-dotenv==1.0.0
+aiofiles==22.1.0
+cachetools==5.3.1

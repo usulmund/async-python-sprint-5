@@ -100,21 +100,6 @@ async def get_account_id_by_token(
     return account_id
 
 
-async def check_file_exists(
-    path: str,
-    session: AsyncSession
-) -> str:
-    """
-    Корутина для проверки существования файла
-    по его пути.
-    """
-    s3 = await get_bucket_session()
-    for key in s3.list_objects(Bucket=BUCKET_NAME)['Contents']:
-        if key['Key'] == path:
-            return True
-    return False
-
-
 async def get_bucket_session():
     session = boto3.session.Session()
     s3 = session.client(

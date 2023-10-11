@@ -1,22 +1,25 @@
 """
 Модуль с описанием основных настроек.
 """
-import os
 import logging
 from logging import config as logging_config
-from pydantic import BaseSettings
+
+from pydantic import BaseSettings, Field
 
 from core.logger import LOGGING
+
 
 logging_config.dictConfig(LOGGING)
 logger = logging.getLogger()
 
-PROJECT_NAME = os.getenv('PROJECT_NAME', 'FileStorage')
-PROJECT_HOST = os.getenv('PROJECT_HOST', 'localhost')
-PROJECT_PORT = int(os.getenv('PROJECT_PORT', '8080'))
-
 
 class AppSettings(BaseSettings):
+    project_host = Field('0.0.0.0', env='PROJECT_HOST')
+    project_port = Field(8080, env='PROJECT_PORT')
+
+    nginx_host = Field('nginx', env='NGINX_HOST')
+    nginx_port = Field(80, env='NGINX_PORT')
+
     app_title: str
     bucket_name: str
     database_dsn: str

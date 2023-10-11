@@ -1,0 +1,7 @@
+FROM python:3.10.12
+
+WORKDIR /app
+COPY . /app
+RUN pip install --upgrade pip && pip install --default-timeout=600 --no-cache-dir -r requirements.txt
+
+ENTRYPOINT [ "python", "main.py", "--migration-on" ]  

@@ -4,12 +4,9 @@
 # Установка пакетов
 pip install -r requirements.txt
 
-# Запуск обслуживающих сервисов
-Введите docker-compose up -d в корне проекта.
-
 # Запуск приложения
-python3 main.py  
-Для применения миграций добавьте флаг --migration-on.  
+docker-compose up -d
+
 
 # Запуск обслуживающих сервисов для тестирования
 Введите docker-compose up -d в директории src/tests.

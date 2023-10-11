@@ -20,7 +20,12 @@ from schemas.response_models import PingInfo
 service_router = APIRouter()
 
 
-@service_router.get("/ping", response_model=PingInfo)
+@service_router.get(
+    '/ping',
+    response_model=PingInfo,
+    summary='Ping services',
+    description='Use in to check access time to services.'
+)
 async def ping_services(
     session: AsyncSession = Depends(get_session),
 ):

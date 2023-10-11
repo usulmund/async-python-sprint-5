@@ -107,7 +107,7 @@ async def create_file_metadata(file):
 
 async def check_file_exists(
     path: str,
-) -> str:
+) -> bool:
     """
     Корутина для проверки существования файла
     по его пути.
