@@ -24,7 +24,7 @@ service_router = APIRouter()
     '/ping',
     response_model=PingInfo,
     summary='Ping services',
-    description='Use in to check access time to services.'
+    description='Use it to check access time to services.'
 )
 async def ping_services(
     session: AsyncSession = Depends(get_session),
